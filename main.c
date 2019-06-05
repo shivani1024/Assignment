@@ -1,72 +1,46 @@
-//Problem statement: Find the eigen values and eigen vectors of the given 2*2 matrix
+//2. A straight line in two dimension can be represented with y=mx +c , where y and x are the y
+//and x coordinates of the point on line in two dimension space respectively. m is slope of the line and
+//c is intercept made by the line with y axis. Write a program that:
+//a) Reads from end user using suitable messages :
+//i. Slope m
+//ii. Intercept c
+//iii. Values of x
+//b) Reads from end user using suitable messages: a random point ( xp , yp )
+//c) Print with suitable message if ( xp, yp ) is on the line y=mx +c
 
-#include<stdio.h>
-#include<conio.h>
-#include<math.h>
-void main()
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
 {
-
-    int i,j,n;
-    float A[40][40],x[40],z[40],e[40],zmax,emax;            //declare variables
-    printf("\nEnter the order of matrix:");                 //Enter 2
-    scanf("%d",&n);
-    printf("\nEnter matrix elements row-wise\n");           //Enters the matrix elements
-    for(i=1; i<=n; i++)
+    int m,x,y,c,x1,y1;                                //declare the variables
+    printf("Enter the slope m:\n");
+    scanf("%d",&m);                                  //reading the slope
+    printf("Enter c:\n");
+    scanf("%d",&c);                                 //read c
+    printf("Enter the value of x\n");
+    scanf("%d",&x);                                 //read x
+    y= m*x +c;
+    printf("Enter the random point (x1,y1)\n");     //read the random point
+    scanf("%d,%d",&x1,&y1);
+    if((y1-m*x1==c))                                //check if the point is on the line
     {
-        for(j=1; j<=n; j++)
-        {
-            printf("A[%d][%d]=", i,j);
-            scanf("%f",&A[i][j]);                          //scans the entered elements
-        }
+        printf("The point is on the line y=%d(x) + %d",m,c);
     }
-    printf("\nEnter the column vector\n");
-    for(i=1; i<=n; i++)
+    else
     {
-        printf("X[%d]=",i);
-        scanf("%f",&x[i]);                                //reads the column vector
+        printf("Point is not on the line");         //if not, then print this msg
     }
-    do
-    {
-        for(i=1; i<=n; i++)
-        {
-            z[i]=0;
-            for(j=1; j<=n; j++)
-            {
-                z[i]=z[i]+A[i][j]*x[j];                  // sums the product of the matrix elements with row vector
-            }
-        }
-        zmax=fabs(z[1]);
-        for(i=2; i<=n; i++)                             //fabs takes the absolute value of float type
-        {
-            if((fabs(z[i]))>zmax)                       //compare zmax and z[i],the greater value is  assigned as zmax
-                zmax=fabs(z[i]);
-        }
-        for(i=1; i<=n; i++)
-        {
-            z[i]=z[i]/zmax;                             //divide z[i] by zmax
-        }
-        for(i=1; i<=n; i++)
-        {
-            e[i]=0;
-            e[i]=fabs((fabs(z[i]))-(fabs(x[i])));       //e[i] is the difference between z[i] and x[i]
-        }
-        emax=e[1];
-        for(i=2; i<=n; i++)
-        {
-            if(e[i]>emax)
-                emax=e[i];                              // if e[i]>emax], e[max] = e[i];
-        }
-        for(i=1; i<=n; i++)
-        {
-            x[i]=z[i];
-        }
-    }
-    while(emax>0.001);
-    printf("\n The required eigen value is %f",zmax);       //eigen value is printed
-    printf("\n\nThe required eigen vector is :\n");         //eigen vector is printed
-    for(i=1; i<=n; i++)
-    {
-        printf("%f\t",z[i]);
-    }
-    getch();
 }
+
+
+//Sample Output
+/*Enter the slope m:
+4
+Enter c:
+5
+Enter the value of x
+4
+Enter the random point (x1,y1)
+1,9
+The point is on the line y=4(x) + 5*/
